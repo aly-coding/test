@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sublease Search</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+body{margin:0}
+a{color:#0B6B5D}a:hover{color:#074A40}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #EDF0EE; color: #111A1E; font-family: 'Instrument Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.55">
+
+<!-- Header -->
+<div style="max-width: 1120px; margin: 0 auto; padding: 28px 24px 0; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 12px 32px; align-items: center; justify-content: space-between">
+<div style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.01em">Sublease Search</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em">
+<a href="#brief" style="color: #111A1E; text-decoration: none">The brief</a>
+<a href="#process" style="color: #111A1E; text-decoration: none">Process</a>
+<a href="#match" style="color: #111A1E; text-decoration: none">Coffee shops</a>
+<a href="#shortlist" style="color: #111A1E; text-decoration: none">Shortlist</a>
+<a href="#checks" style="color: #111A1E; text-decoration: none">Checks</a>
+</div>
+</div>
+
+<!-- Hero -->
+<div style="max-width: 1120px; margin: 0 auto; padding: 72px 24px 88px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #56646B">Project page · Updated Oct 15, 2026</div>
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(42px, 6.2vw, 76px); line-height: 0.98; letter-spacing: -0.03em; text-wrap: balance">Finding commercial space to <span style="color: {{accent}}">sublease</span></h1>
+<p style="margin: 0; max-width: 520px; color: #2F3D43">We are looking for commercial space in [CITY] that we can take over from a tenant who no longer needs it. This page covers what we need, how the search runs, and which spaces are on the shortlist.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<a href="#shortlist" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; box-sizing: border-box; background: {{accent}}; color: #FFFFFF; text-decoration: none; font-weight: 600; border-radius: 4px">See the shortlist</a>
+<a href="#brief" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; box-sizing: border-box; border: 1.5px solid #111A1E; color: #111A1E; text-decoration: none; font-weight: 600; border-radius: 4px">What we need</a>
+</div>
+</div>
+
+<!-- Stacking plan -->
+<div style="flex: 1 1 400px; min-width: 0; background: #FFFFFF; border: 1px solid #C9D1CD; border-radius: 4px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #56646B">
+<span>Sample stacking plan</span>
+<span>Floor / suite</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{floors}}" as="floor" hint-placeholder-count="4">
+<div style="display: flex; gap: 6px; align-items: stretch">
+<div style="flex: 0 0 28px; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #56646B">{{floor.label}}</div>
+<sc-for list="{{floor.suites}}" as="suite" hint-placeholder-count="2">
+<div style="flex: {{suite.grow}} 1 0; min-width: 0; min-height: 64px; box-sizing: border-box; padding: 8px 10px; border-radius: 2px; background: {{suite.bg}}; color: {{suite.fg}}; font-family: 'IBM Plex Mono', monospace; font-size: 12px; line-height: 1.3; display: flex; flex-direction: column; justify-content: space-between">
+<span>{{suite.name}}</span>
+<span style="opacity: 0.85">{{suite.note}}</span>
+</div>
+</sc-for>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: #56646B; padding-top: 4px">
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: {{accent}}; border-radius: 2px; display: inline-block"></span>Sublease available</span>
+<span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; background: #D9DFDC; border-radius: 2px; display: inline-block"></span>Occupied</span>
+</div>
+</div>
+</div>
+
+<!-- Brief -->
+<div id="brief" style="background: #FFFFFF; border-top: 1px solid #C9D1CD; border-bottom: 1px solid #C9D1CD">
+<div style="max-width: 1120px; margin: 0 auto; padding: 80px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em">The brief</h2>
+<p style="margin: 0; color: #2F3D43">Every listing is measured against the same sheet. A space that misses a must-have is passed on early, so tours go to the spaces that can actually work.</p>
+<p style="margin: 0; color: #56646B; font-size: 15px">Fill in the bracketed values to match the real requirements.</p>
+</div>
+<div style="flex: 1.6 1 460px; min-width: 0; border: 1px solid #111A1E; border-radius: 4px">
+<div style="padding: 12px 20px; background: #111A1E; color: #EDF0EE; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">Space requirements</div>
+<sc-for list="{{brief}}" as="row" hint-placeholder-count="7">
+<div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 20px; border-top: 1px solid #C9D1CD">
+<div style="flex: 0 0 150px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #56646B; padding-top: 3px">{{row.label}}</div>
+<div style="flex: 1 1 220px; min-width: 0; font-weight: 500">{{row.value}}</div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- Why sublease -->
+<div style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em; max-width: 640px; text-wrap: balance">Why a sublease instead of a new lease</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 32px">
+<sc-for list="{{reasons}}" as="reason" hint-placeholder-count="3">
+<div style="flex: 1 1 280px; min-width: 0; border-top: 3px solid {{accent}}; padding-top: 16px; display: flex; flex-direction: column; gap: 8px">
+<h3 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 24px; letter-spacing: -0.01em">{{reason.title}}</h3>
+<p style="margin: 0; color: #2F3D43">{{reason.body}}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<!-- Process -->
+<div id="process" style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 32px">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em">How the search runs</h2>
+<div style="display: flex; flex-direction: column; border-top: 1px solid #111A1E">
+<sc-for list="{{steps}}" as="step" hint-placeholder-count="5">
+<div style="display: flex; flex-wrap: wrap; gap: 8px 32px; padding: 24px 0; border-bottom: 1px solid #C9D1CD">
+<div style="flex: 0 0 56px; font-family: 'IBM Plex Mono', monospace; font-size: 15px; color: {{accent}}; padding-top: 6px">{{step.n}}</div>
+<h3 style="flex: 0 1 280px; margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.15; letter-spacing: -0.01em">{{step.title}}</h3>
+<p style="flex: 1 1 320px; min-width: 0; margin: 0; color: #2F3D43; padding-top: 4px">{{step.body}}</p>
+</div>
+</sc-for>
+</div>
+</div>
+
+<!-- Coffee shop matches -->
+<div id="match" style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em; max-width: 720px; text-wrap: balance">San Francisco coffee shops that close by 5 pm</h2>
+<p style="margin: 0; max-width: 680px; color: #2F3D43">A café that shuts in the afternoon has a fully equipped space sitting idle every evening. These eight are the best fit for another business that wants to rent that window. Hours come from Google listings checked on Oct 15, 2026.</p>
+</div>
+<div style="overflow-x: auto; background: #FFFFFF; border: 1px solid #C9D1CD; border-radius: 4px">
+<div style="min-width: 860px">
+<div style="display: grid; grid-template-columns: 2.2fr 1.3fr 1.3fr 0.7fr 1.5fr; gap: 16px; padding: 14px 20px; background: #111A1E; color: #EDF0EE; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">
+<span>Coffee shop</span><span>Mon to Fri</span><span>Sat and Sun</span><span>Rating</span><span>Space free from</span>
+</div>
+<sc-for list="{{matches}}" as="m" hint-placeholder-count="8">
+<div style="display: grid; grid-template-columns: 2.2fr 1.3fr 1.3fr 0.7fr 1.5fr; gap: 16px; padding: 18px 20px; border-top: 1px solid #C9D1CD; align-items: center">
+<div style="min-width: 0"><div style="font-weight: 600">{{m.name}}</div><div style="font-size: 14px; color: #56646B">{{m.area}} · {{m.address}}</div></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">{{m.weekday}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">{{m.weekend}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">{{m.rating}}</span>
+<div><span style="display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 500; background: #D3E8E2; color: #074A40">{{m.free}}</span></div>
+</div>
+</sc-for>
+</div>
+</div>
+<p style="margin: 0; max-width: 720px; color: #56646B; font-size: 15px">Hours show when each shop is open to customers. None of these listings say a shop wants to rent its space, so each one needs a call to the owner. Doppio Coffee &amp; Brunch closes at 5 pm Monday to Wednesday only, so it is left out.</p>
+</div>
+
+<!-- Shortlist -->
+<div id="shortlist" style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em">Shortlist</h2>
+<p style="margin: 0; max-width: 620px; color: #2F3D43">Spaces still in play, with the numbers that decide between them. The rows below are placeholders until real listings are added.</p>
+</div>
+<div style="overflow-x: auto; background: #FFFFFF; border: 1px solid #C9D1CD; border-radius: 4px">
+<div style="min-width: 760px">
+<div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 16px; padding: 14px 20px; background: #111A1E; color: #EDF0EE; font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em">
+<span>Space</span><span>Size</span><span>Rent</span><span>Term left</span><span>Status</span>
+</div>
+<sc-for list="{{spaces}}" as="space" hint-placeholder-count="4">
+<div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1.4fr; gap: 16px; padding: 18px 20px; border-top: 1px solid #C9D1CD; align-items: center">
+<div style="min-width: 0"><div style="font-weight: 600">{{space.name}}</div><div style="font-size: 14px; color: #56646B">{{space.note}}</div></div>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">{{space.size}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">{{space.rent}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 14px">{{space.term}}</span>
+<div><span style="display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: 14px; font-weight: 500; background: {{space.bg}}; color: {{space.fg}}">{{space.status}}</span></div>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+
+<!-- Checks -->
+<div id="checks" style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 88px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 48px">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em">Before signing a sublease</h2>
+<p style="margin: 0; color: #2F3D43">A sublease sits on top of another lease, so the first lease matters as much as the second. These are the points checked on every shortlisted space.</p>
+</div>
+<div style="flex: 1.6 1 460px; min-width: 0; display: flex; flex-direction: column">
+<sc-for list="{{checks}}" as="check" hint-placeholder-count="6">
+<div style="display: flex; gap: 16px; padding: 18px 0; border-top: 1px solid #C9D1CD">
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true" style="flex: 0 0 22px; margin-top: 3px"><rect x="1" y="1" width="20" height="20" rx="3" stroke="#111A1E" stroke-width="1.5"></rect><path d="M6 11.5l3.5 3.5L16 8" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<div style="min-width: 0"><div style="font-weight: 600">{{check.title}}</div><div style="color: #2F3D43">{{check.body}}</div></div>
+</div>
+</sc-for>
+</div>
+</div>
+
+<!-- Contact -->
+<div style="background: #111A1E; color: #EDF0EE">
+<div style="max-width: 1120px; margin: 0 auto; padding: 80px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: space-between">
+<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 40px; line-height: 1.05; letter-spacing: -0.02em">Know of a space?</h2>
+<p style="margin: 0; max-width: 560px; color: #C9D1CD">Send listings, broker contacts or sublease offers. Include the address, size, asking rent and how long the sublessor's lease has left to run.</p>
+</div>
+<div style="flex: 0 1 360px; min-width: 0; border: 1px solid #56646B; border-radius: 4px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: #9AA8AE">Contact</div>
+<div style="font-size: 20px; font-weight: 600">[NAME]</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px; word-break: break-word">[EMAIL ADDRESS]</div>
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 15px">[PHONE NUMBER]</div>
+</div>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#0B6B5D","options":["#0B6B5D","#1F5FA8","#B4481F","#5A3E9B"]},"$preview":{"width":1280,"height":3400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#0B6B5D';
+    const tone = (kind, name, grow, note) => ({
+      name,
+      grow,
+      note,
+      bg: kind === 'sub' ? accent : '#D9DFDC',
+      fg: kind === 'sub' ? '#FFFFFF' : '#4A5559'
+    });
+    const floors = [
+      { label: '4', suites: [tone('occ', 'Ste 410', 3, 'Occupied'), tone('sub', 'Ste 420', 2, 'Sublease')] },
+      { label: '3', suites: [tone('sub', 'Ste 310', 2, 'Sublease'), tone('occ', 'Ste 320', 3, 'Occupied')] },
+      { label: '2', suites: [tone('occ', 'Ste 200', 2, 'Occupied'), tone('occ', 'Ste 210', 1, 'Occ.'), tone('sub', 'Ste 220', 2, 'Sublease')] },
+      { label: '1', suites: [tone('occ', 'Lobby and ground floor retail', 5, 'Occupied')] }
+    ];
+    const brief = [
+      { label: 'Space type', value: '[Office, retail, studio or light industrial]' },
+      { label: 'Size', value: '[MIN] to [MAX] rentable sq ft' },
+      { label: 'Budget', value: '[$ per sq ft per year], all-in with operating costs' },
+      { label: 'Term', value: '[MONTHS] remaining on the master lease, with an option to extend' },
+      { label: 'Start date', value: '[MOVE-IN DATE]' },
+      { label: 'Location', value: '[NEIGHBORHOODS OR DISTRICTS]' },
+      { label: 'Must-haves', value: '[Parking, after-hours access, meeting rooms, loading dock]' }
+    ];
+    const reasons = [
+      { title: 'Faster move-in', body: 'The space is already built out, so occupancy can start in weeks. A new lease usually adds design, permits and construction first.' },
+      { title: 'Shorter commitment', body: 'A sublease runs only as long as the sublessor has left on their lease, which suits a team that is not ready for a long term.' },
+      { title: 'Often furnished', body: 'Some spaces keep desks, cabling and meeting rooms in place, which cuts the cost of setting up.' }
+    ];
+    const steps = [
+      { n: '01', title: 'Write the brief', body: 'Fix size, budget, term, location and must-haves so every listing is judged against the same sheet.' },
+      { n: '02', title: 'Source spaces', body: 'Check broker listings and sublease marketplaces, and ask brokers and contacts about spaces that are not advertised yet.' },
+      { n: '03', title: 'Tour and shortlist', body: 'Visit the closest matches, record layout and condition, and rank them against the brief.' },
+      { n: '04', title: 'Review the paper', body: 'Read the sublease and the master lease beneath it, and confirm the landlord will consent.' },
+      { n: '05', title: 'Sign and move in', body: 'Agree final terms, pay the deposit, provide proof of insurance and set the start date.' }
+    ];
+    const pill = (status) => {
+      if (status === 'Touring') return { bg: '#D3E8E2', fg: '#074A40' };
+      if (status === 'Reviewing terms') return { bg: '#F6E3B4', fg: '#5A4300' };
+      return { bg: '#E3E6E4', fg: '#3F4A4F' };
+    };
+    const mk = (name, note, size, rent, term, status) => ({ name, note, size, rent, term, status, ...pill(status) });
+    const spaces = [
+      mk('[ADDRESS 1]', '[Floor, suite, one line on the space]', '[SQ FT]', '[$/SF/YR]', '[MONTHS]', 'Touring'),
+      mk('[ADDRESS 2]', '[Floor, suite, one line on the space]', '[SQ FT]', '[$/SF/YR]', '[MONTHS]', 'Reviewing terms'),
+      mk('[ADDRESS 3]', '[Floor, suite, one line on the space]', '[SQ FT]', '[$/SF/YR]', '[MONTHS]', 'Reviewing terms'),
+      mk('[ADDRESS 4]', '[Floor, suite, one line on the space]', '[SQ FT]', '[$/SF/YR]', '[MONTHS]', 'Passed')
+    ];
+    const checks = [
+      { title: 'Landlord consent', body: 'The master lease usually requires written approval from the landlord before a sublease can start.' },
+      { title: 'Master lease terms', body: 'A sublease generally inherits the rules of the lease above it: permitted use, hours, alterations and insurance.' },
+      { title: 'End date and renewal', body: 'The sublease ends when the master lease ends, so check the date and whether an extension is possible.' },
+      { title: 'Total monthly cost', body: 'Add base rent, operating expenses, utilities and parking so spaces can be compared on the same basis.' },
+      { title: 'Deposit and furnishings', body: 'Confirm the security deposit and list exactly which furniture and equipment stay.' },
+      { title: 'Who is responsible', body: 'The sublessor stays liable to the landlord, so agree in writing who handles repairs and what happens on default.' }
+    ];
+    const matches = [
+      { name: 'The Coffee Movement', area: 'Outer Richmond', address: '1737 Balboa St', weekday: '7 am to 2 pm', weekend: '7 am to 4 pm', rating: '4.8', free: '2 pm weekdays' },
+      { name: 'CoffeeShop', area: 'Mission', address: '3139 Mission St', weekday: '7 am to 2 pm (Fri to 4 pm)', weekend: '7 am to 4 pm', rating: '4.6', free: '2 pm Mon to Thu' },
+      { name: 'Kopê House', area: 'Hayes Valley', address: '546 Laguna St', weekday: '8 am to 2 pm (Thu, Fri to 4 pm)', weekend: '8 am to 4 pm', rating: '4.9', free: '2 pm Mon to Wed' },
+      { name: 'Paper Son Coffee', area: 'SoMa', address: '303 2nd St', weekday: '8 am to 3:30 pm', weekend: 'Closed', rating: '4.7', free: '3:30 pm, all weekend' },
+      { name: 'Abanico Coffee Roasters', area: 'Mission', address: '2121 Mission St', weekday: '7:30 am to 4 pm', weekend: '8 am to 4 pm', rating: '4.6', free: '4 pm daily' },
+      { name: 'Hedge Coffee', area: 'Mission', address: '434 Shotwell St', weekday: '7 am to 4 pm', weekend: '8 am to 5 pm', rating: '4.6', free: '4 pm weekdays' },
+      { name: 'Four Barrel Coffee', area: 'Mission', address: '375 Valencia St', weekday: '7 am to 5 pm', weekend: '7 am to 5 pm', rating: '4.5', free: '5 pm daily' },
+      { name: 'The Wild Fox', area: 'Financial District', address: '123 Battery St', weekday: '7 am to 5 pm', weekend: '8 am to 2 pm', rating: '4.7', free: '5 pm weekdays, 2 pm weekends' }
+    ];
+    return { accent, floors, brief, reasons, steps, spaces, checks, matches };
+  }
+}
+</script>
+</body>
+</html>
